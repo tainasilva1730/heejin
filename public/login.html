@@ -1,14 +1,15 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - ARTMS</title>
+    <title>Login</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="server" href="server.js">
 </head>
 
-<body>
+<body class="login-page">
 
     <nav class="menu">
         <a href="index.html" class="link-menu">HOME</a>
@@ -18,95 +19,77 @@
         <a href="login.html" class="link-menu">LOGIN</a>
     </nav>
 
-    <div class="loginContainer">
+    <div class="box-login">
 
-        <h2>Bem-vindo de volta!</h2>
+        <h1>Login</h1>
 
-        <form id="formLogin">
+        <label for="loginEmail">E-mail</label><br>
+        <input type="email" id="loginEmail" placeholder="Digite seu e-mail"><br><br>
 
-            <label for="email">E-mail</label>
-            <input
-                type="email"
-                id="email"
-                placeholder="Digite seu e-mail"
-                required
-            >
+        <label for="loginSenha">Senha</label><br>
+        <input type="password" id="loginSenha" placeholder="Digite sua senha"><br><br>
 
-            <label for="senha">Senha</label>
-            <input
-                type="password"
-                id="senha"
-                placeholder="Digite sua senha"
-                required
-            >
+        <button onclick="logarUsuario()">Enviar</button>
 
-            <button type="submit">ENTRAR</button>
-
-        </form>
-
-        <p id="mensagemLogin"></p>
-
-        <p class="linkCadastro">
-            Ainda não possui uma conta?
-            <a href="cadastro.html">Cadastre-se</a>
-        </p>
+        <div id="loginMensagem"></div>
 
     </div>
 
-    <footer>
-        &copy; Desenvolvido por Tainá Vitória - 2026 Curitiba
-    </footer>
-
     <script>
+        async function logarUsuario() {
+            const emailEntrada = document.querySelector('#loginEmail');
+            const senhaEntrada = document.querySelector('#loginSenha');
+            const loginMensagem = document.querySelector('#loginMensagem');
 
-        const formLogin = document.querySelector('#formLogin');
-        const mensagemLogin = document.querySelector('#mensagemLogin');
+            const emailDigitado = emailEntrada.value;
+            const senhaDigitada = senhaEntrada.value;
 
-        formLogin.addEventListener('submit', async (evento) => {
+            if (!emailDigitado || !senhaDigitada) {
+                loginMensagem.innerText = 'Preencha todos os campos antes de enviar!';
+                loginMensagem.style.color = 'red';
+                return;
+            }
 
-            evento.preventDefault();
-
-            const email = document.querySelector('#email').value.trim();
-            const senha = document.querySelector('#senha').value;
+            loginMensagem.innerText = 'Dados enviados, aguarde...';
+            loginMensagem.style.color = 'orange';
 
             try {
+               
+                const respostaBe = await fetch('https://outubro.onrender.com/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        email: emailDigitado,
+                        senha: senhaDigitada
+                    })
+                });
 
-                const respostaServidor = await fetch(
-                    'http://localhost:5500/login',
-                    {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            email: email,
-                            senha: senha
-                        })
-                    }
-                );
+                const dados = await respostaBe.json();
 
-                const dados = await respostaServidor.json();
-
-                if (!respostaServidor.ok) {
-                    mensagemLogin.textContent = dados.erro;
+                if (!respostaBe.ok) {
+                    loginMensagem.innerText = dados.erro;
+                    loginMensagem.style.color = 'red';
                     return;
                 }
 
-                mensagemLogin.textContent = dados.mensagem;
+                
+                loginMensagem.innerText = `${dados.mensagem} Conta: ${dados.usuario}`;
+                loginMensagem.style.color = 'green';
 
-                formLogin.reset();
+                emailEntrada.value = '';
+                senhaEntrada.value = '';
+
+            
 
             } catch (erro) {
-
-                mensagemLogin.textContent =
-                    'Erro ao conectar com o servidor.';
-
+                console.error('Erro na requisição:', erro);
+                loginMensagem.innerText = 'Erro ao conectar com o servidor!!';
+                loginMensagem.style.color = 'red';
             }
-
-        });
-
+        }
     </script>
 
 </body>
-
 </html>

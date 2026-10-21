@@ -9,333 +9,204 @@
 
 :root {
     --fundocinema: #000000;
-    --fundocard:  #670043;;
-    --botaos:  #ff00a6;;
+    --fundocard: #670043;
+    --botaos: #ff00a6;
     --brilho: #f1fbea;
-    --menu-bg:  #ff00a6;
+    --menu-bg: #ff00a6;
 }
 
 body {
     background-color: var(--fundocinema);
-    color: #fff;
-    font-family: 'Roboto', sans-serif;
-    background-size: 100% auto;
-    background-position: center top;
-    background-repeat: no-repeat;
+    color: #ffffff;
+    font-family: 'Bodoni Moda', serif;
 }
 
 .menu {
     position: sticky;
     top: 0;
+    padding: 20px;
+    background-color: var(--menu-bg);
     z-index: 100;
-
     display: flex;
     justify-content: center;
     gap: 40px;
-
-    padding: 20px;
-
-    background-color: var(--menu-bg);
 }
 
 .link-menu {
+    text-decoration: none;
     font-family: 'Bodoni Moda', serif;
     font-style: italic;
-    color: #000;
     font-weight: 700;
     font-size: 15px;
-    display: inline-block; 
-    transition: transform 0.3s ease, color 0.3s ease; 
-    text-decoration: none; 
+    letter-spacing: 2px;
+    color: #000000;
+    transition: transform 0.3s ease, color 0.3s ease;
 }
 
 .link-menu:hover {
+    color: var(--brilho);
     transform: scale(1.15);
-    color: var(--brilho);  
-    text-decoration: underline; 
+    text-shadow: 0 0 10px var(--brilho);
+    text-decoration: underline;
+}
+
+.txt {
+    margin-top: -15px;
+    font-family: 'Bodoni Moda', serif;
+    font-weight: 400;
+    font-style: normal;
 }
 
 .hero-deadpool {
-    background-image:
-        linear-gradient(
-            to bottom,
-            rgba(0, 0, 0, 0.25) 0%,
-            rgba(0, 0, 0, 0.45) 35%,
-            rgba(0, 0, 0, 0.75) 50%,
-            rgba(0, 0, 0, 0.75) 65%,
-            #000000 100%
-        ),
-        url("imagens/heejinbg.jpg");
-    height: 620px;
-    width: 100%;
-
-    position: relative;
-
     display: flex;
     align-items: center;
-    justify-content: space-between;
-
-    padding: 40px 8%;
-
-    overflow: hidden;
+    justify-content: space-around;
+    padding: 40px;
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.25) 0%,
+        rgba(0, 0, 0, 0.45) 35%,
+        rgba(0, 0, 0, 0.75) 50%,
+        rgba(0, 0, 0, 0.75) 65%,
+        #000000 100%
+    );
+    min-height: 70vh;
 }
 
-
-.esquerdo {
-    width: 35%;
-    position: relative;
-    z-index: 2;
+.esquerdo, .direito {
+    flex: 1;
+    padding: 20px;
+    max-width: 400px;
 }
 
 .hero-titulo {
     font-family: 'Bodoni Moda', serif;
     font-style: italic;
+    font-weight: 700;
     font-size: clamp(50px, 5vw, 99px);
-    letter-spacing: 5px;
-    line-height: 0.9;
-    margin-bottom: 30px;
     color: #ff00a6;
+    letter-spacing: 5px;
+    text-shadow: 3px 3px 0px var(--fundocard);
 }
 
 .hero-subtitulo {
     font-family: 'Bodoni Moda', serif;
     font-style: italic;
+    font-weight: 400;
     font-size: 15px;
+    margin-top: 15px;
     line-height: 1.5;
     color: #ff00a6;
 }
 
-/* IMAGEM PRINCIPAL */
-
-.deadpool-front {
-    display: none;
+.deadpool-front {     
+    -webkit-mask-image: radial-gradient(circle, black 60%, transparent 100%);
+    mask-image: radial-gradient(circle, black 60%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent),
+                        linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+    mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent),
+                linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+    -webkit-mask-composite: source-in;
+    mask-composite: intersect;
+    opacity: 40%; 
+    filter: drop-shadow(0px 10px 10px rgba(255, 13, 142, 0.2)); 
+    max-height: 550px;
+    object-fit: contain;
+    animation: flutuar 3s ease-in-out infinite;
 }
-
-/* LADO DIREITO */
-
-.direito {
-    width: 28%;
-
-    position: relative;
-    z-index: 2;
-
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-
-    gap: 25px;
-}
-
-/* BALÃO */
 
 .bloco-balao {
-    position: relative;
-
-    padding: 18px 22px;
-
-    background-color: var(--fundocard);
-
+    font-family: 'Bodoni Moda', serif;
+    font-weight: 400;
+    font-style: normal;
+    background: var(--fundocard);
+    border: 3px solid var(--botaos);
+    padding: 20px;
     border-radius: 20px;
-
-    color: #fff;
-
-    line-height: 1.6;
-
+    position: relative;
+    margin-bottom: 25px;
+    color: #ffffff;
     box-shadow: 0 0 25px #6b0046;
 }
 
 .bloco-balao::after {
     content: "";
-
     position: absolute;
-
     bottom: -12px;
     left: 30px;
-
     border-width: 12px 12px 0 0;
     border-style: solid;
     border-color: var(--fundocard) transparent transparent transparent;
 }
 
 .btn-principal {
-    display: inline-block;
-
-    padding: 14px 24px;
-
-    background-color: var(--botaos);
-
-    color: #000;
-
-    text-decoration: none;
-
+    font-family: 'Bodoni Moda', serif;
     font-weight: 700;
-
-    border-radius: 8px;
-
-    transition: 0.3s;
+    font-style: normal;
+    display: inline-block;
+    background-color: var(--botaos);
+    color: #000000;
+    text-decoration: none;
+    padding: 15px 30px;
+    border-radius: 30px;
+    text-align: center;
+    font-size: 1.2rem;
+    transition: 0.3s ease;
 }
 
 .btn-principal:hover {
-    transform: translateY(-3px);
-
+    background-color: var(--brilho);
+    transform: translateY(-3px) scale(1.05);
     box-shadow: 0 5px 20px #6b0046;
 }
 
+/* PERFIL BOTTOM */
 .container-principal {
-    width: 90%;
-    max-width: 1100px;
-
-    margin: 0 auto;
-
-    padding: 70px 0;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
 }
 
 .secao-perfil {
     display: flex;
-
+    gap: 40px;
     align-items: center;
-
-    gap: 60px;
-
-    padding: 40px;
-
-    background-color: #0b0b0b;
-
+    background: #0b0b0b;
+    padding: 30px;
     border-radius: 15px;
-
-    object-fit: cover;
-
+    border: 2px solid #ff0d8e;
     box-shadow: 0 0 30px #ff0d8e;
 }
 
-.perfil-moldura {
-    width: 320px;
-    min-width: 320px;
-}
-
 .perfil-foto {
-    width: 100%;
-
-    display: block;
-
-    border-radius: 15px;
-
+    width: 390px;
+    height: 350px;
     object-fit: cover;
-
+    border-radius: 10px;
+    border: 3px solid #ff0d8e;
     box-shadow: 0 0 30px #ff0d8e;
 }
 
 .perfil-texto h2 {
     font-family: 'Bodoni Moda', serif;
     font-style: italic;
-
-    font-size: 38px;
-
-    margin-bottom: 25px;
-    color: #ff0d8e;;
+    font-weight: 700;
+    font-size: 2.5rem;
+    color: #ff0d8e;
+    margin-bottom: 15px;
 }
 
 .perfil-texto p {
-    color: #ff0d8e;
-
-    font-size: 16px;
-
+    font-family: 'Bodoni Moda', serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 1.1rem;
     line-height: 1.8;
-
-    margin-bottom: 18px;
+    margin-bottom: 10px;
+    color: #ff0d8e;
 }
 
-
-footer {
-    padding: 25px;
-
-    text-align: center;
-
-    color: #999;
-
-    font-size: 14px;
-
-    border-top: 1px solid #222;
-}
-
-
-@media (max-width: 900px) {
-
-    .hero-deadpool {
-        height: auto;
-        min-height: 550px;
-
-        flex-direction: column;
-
-        justify-content: center;
-
-        text-align: center;
-
-        padding: 50px 6%;
-    }
-
-    .esquerdo,
-    .direito {
-        width: 100%;
-        align-items: center;
-    }
-
-    .direito {
-        margin-top: 30px;
-    }
-
-    .secao-perfil {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .perfil-moldura {
-        width: 280px;
-        min-width: auto;
-    }
-}
-
-
-@media (max-width: 600px) {
-
-    .menu {
-        gap: 15px;
-        padding: 15px 10px;
-        flex-wrap: wrap;
-    }
-
-    .link-menu {
-        font-size: 12px;
-    }
-
-    .hero-deadpool {
-        min-height: 500px;
-    }
-
-    .hero-titulo {
-        font-size: 65px;
-    }
-
-    .hero-subtitulo {
-        font-size: 15px;
-    }
-
-    .bloco-balao {
-        padding: 16px 18px;
-        font-size: 14px;
-    }
-
-    .secao-perfil {
-        padding: 25px;
-    }
-
-    .perfil-texto h2 {
-        font-size: 28px;
-    }
-}
-
-/* GALERIA */
-
+/* VITRINE GALERIA */
 .vitrine {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -350,20 +221,13 @@ footer {
     padding: 25px;
     border-radius: 12px;
     background-color: var(--fundocard);
-
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     gap: 15px;
-
-    height: 720px;
-
-    transition: transform 0.3s ease,
-                box-shadow 0.3s ease,
-                border-color 0.3s ease;
+    height: 500px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
-
-/* SOMBRA DE CADA INTEGRANTE */
 
 .heroi:nth-child(1):hover {
     transform: translateY(-10px);
@@ -395,45 +259,41 @@ footer {
     box-shadow: 0 12px 25px #d000ff;
 }
 
+.heroi:hover .foto-heroi {
+    border-color: var(--brilho);
+}
+
 .foto-heroi {
     width: 100%;
-    height: 450px;
+    height: 160px;
     object-fit: cover;
-
     border: 3px solid var(--botaos);
     border-radius: 12px;
-
     transition: border-color 0.3s ease;
 }
 
 .titulo {
     font-family: 'Bodoni Moda', serif;
     font-style: italic;
+    font-weight: 700;
     letter-spacing: 3px;
     font-size: 2rem;
     color: var(--botaos);
     text-align: center;
 }
 
-.heroi p {
-    font-size: 1rem;
-    line-height: 1.5;
-    text-align: center;
-}
-
 .botao {
+    font-family: 'Bodoni Moda', serif;
+    font-style: italic;
+    font-weight: 700;
     background-color: var(--botaos);
     border: none;
     padding: 12px;
     border-radius: 10px;
-
     color: #000000;
-    font-weight: bold;
     cursor: pointer;
     font-size: 1rem;
-
-    transition: background-color 0.3s ease,
-                transform 0.1s ease;
+    transition: background-color 0.3s ease, transform 0.1s ease;
 }
 
 .botao:hover {
@@ -441,428 +301,572 @@ footer {
     color: #000000;
 }
 
-/* CHAT */
-
+/* CHAT AREA */
 .chatContainer {
-    width: 45%;
-    max-width: 750px;
-    margin: 50px auto;
-    padding: 25px;
-
+    max-width: 600px;
+    margin: 40px auto;
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
     background-color: rgba(0, 0, 0, 0.85);
-
+    border-radius: 15px;
     border: 3px solid #FF1493;
-    border-radius: 20px;
-
     box-shadow: 0 0 25px rgba(255, 20, 147, 0.5);
+    overflow: hidden;
 }
 
-
-/* TÍTULO */
-
 #boasVindas {
+    padding: 15px 20px;
+    margin: 0;
+    text-align: center;
     font-family: 'Bodoni Moda', serif;
     font-style: italic;
-
     color: #FF1493;
-
-    text-align: center;
-
-    margin: 0 0 20px 0;
-
     font-size: 28px;
 }
 
-
-/* QUADRADO DO CHAT */
-
 #caixaChat {
-    width: 100%;
-    height: 360px;
-
-    padding: 15px;
-
-    box-sizing: border-box;
-
-    background-image:
-        linear-gradient(
-            rgba(0, 0, 0, 0.55),
-            rgba(0, 0, 0, 0.65)
-        ),
-        url("imagens/artmsbg.webp");
-
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 10px;
+    background-image: linear-gradient(
+        rgba(0, 0, 0, 0.55),
+        rgba(0, 0, 0, 0.65)
+    ), url("imagens/artmsbg.webp");
     background-size: cover;
     background-position: center;
-
-    border: 2px solid #FF1493;
-    border-radius: 15px;
-
-    overflow-y: auto;
 }
-
-
-/* MENSAGENS */
 
 .msg {
-    width: fit-content;
-    max-width: 75%;
-
-    padding: 10px 15px;
-
-    margin-bottom: 12px;
-
-    background-color: #ff14915c;
-
-    border-radius: 12px;
-
-    color: white;
-
+    font-family: 'Bodoni Moda', serif;
+    font-weight: 400;
+    font-style: normal;
+    max-width: 80%;
+    padding: 15px;
+    border-radius: 15px;
+    font-size: 1rem;
     line-height: 1.4;
+    background-color: #ff14915c;
+    border: 2px solid #FF1493;
+    color: white;
+    margin: 0;
+    align-self: flex-start;
+    overflow-wrap: anywhere;
 }
-
-
-/* ÁREA DE DIGITAR */
 
 #inputArea {
     display: flex;
-
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.9);
     gap: 10px;
-
-    margin-top: 15px;
 }
 
-
-/* INPUT */
-
-#mensagem {
+#inputArea input {
     flex: 1;
-
-    padding: 13px;
-
-    background-color: rgba(0, 0, 0, 0.9);
-
+    min-width: 0;
+    padding: 12px;
+    border-radius: 8px;
     border: 2px solid #FF1493;
-
-    border-radius: 10px;
-
-    color: white;
-
+    background-color: rgba(0, 0, 0, 0.9);
+    color: #fff;
+    font-family: 'Bodoni Moda', serif;
     font-size: 1rem;
-
     outline: none;
 }
 
-#mensagem::placeholder {
+#inputArea input::placeholder {
     color: #ccc;
 }
 
-#mensagem:focus {
+#inputArea input:focus {
+    border-color: #FF1493;
     box-shadow: 0 0 10px #FF1493;
 }
 
-
-/* BOTÃO */
-
-#btnEnviar {
-    padding: 13px 25px;
-
+#inputArea button {
     background-color: #FF1493;
-
-    border: none;
-
-    border-radius: 10px;
-
     color: #000;
-
+    border: none;
+    padding: 0 25px;
+    font-family: 'Bodoni Moda', serif;
     font-weight: bold;
-
-    font-size: 1rem;
-
+    border-radius: 8px;
     cursor: pointer;
-
-    transition: 0.3s;
+    transition: 0.2s;
 }
 
-#btnEnviar:hover {
+#inputArea button:hover {
     background-color: #8B0057;
-
     color: white;
-
     transform: translateY(-2px);
-
     box-shadow: 0 0 15px rgba(255, 20, 147, 0.5);
 }
 
-#btnEnviar:disabled {
+#inputArea button:disabled {
     opacity: 0.5;
-
     cursor: not-allowed;
-
     transform: none;
 }
 
+footer {
+    text-align: center;
+    padding: 20px;
+    color: #999;
+    font-size: 0.9rem;
+    border-top: 1px solid #222;
+}
 
-/* CELULAR */
+/* CADASTRO E LOGIN */
+.cadastro,
+.login-page {
+    font-family: 'Bodoni Moda', serif;
+    font-style: italic;
+    font-size: 20px;
+    color: #FF1493;
+    letter-spacing: 5px;
+    text-align: center;
+}
 
-@media (max-width: 600px) {
+.box-cadastro,
+.box-login {
+    width: 700px;
+    margin: 48px auto;
+    padding: 15px;
+    border: 3px solid #FF1493;
+    border-radius: 30px;
+    background-color: rgba(0, 0, 0, 0.85);
+    box-shadow: 0 0 25px rgba(255, 20, 147, 0.5);
+    box-sizing: border-box;
+}
+
+.box-cadastro h1,
+.box-login h1 {
+    font-weight: 400;
+    padding: 20px;
+    text-align: center;
+    color: #FF1493;
+}
+
+.cadastro input,
+.box-login input {
+    font-family: 'Bodoni Moda', serif;
+    font-style: normal;
+    border: 2px solid #FF1493;
+    border-radius: 30px;
+    width: 500px;
+    padding: 13px;
+    margin: 1px;
+    box-sizing: border-box;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.9);
+    color: white;
+}
+
+.cadastro input::placeholder,
+.box-login input::placeholder {
+    color: #ccc;
+}
+
+.cadastro input:focus,
+.box-login input:focus {
+    box-shadow: 0 0 10px rgba(255, 20, 147, 0.5);
+}
+
+.cadastro button,
+.box-login button {
+    background-color: #FF1493;
+    font-family: 'Bodoni Moda', serif;
+    font-style: italic;
+    font-weight: bold;
+    font-size: 20px;
+    color: #000;
+    letter-spacing: 2px;
+    border: none;
+    border-radius: 30px;
+    width: 400px;
+    padding: 15px;
+    margin: 10px auto 25px auto;
+    cursor: pointer;
+    transition: transform 0.3s ease, color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cadastro button:hover,
+.box-login button:hover {
+    transform: scale(1.05) translateY(-2px);
+    box-shadow: 0 0 15px rgba(255, 20, 147, 0.5);
+    background-color: #8B0057;
+    color: white;
+}
+
+.cadastro #resposta,
+.box-login #loginMensagem {
+    text-align: center;
+    font-family: 'Bodoni Moda', serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 15px;
+    letter-spacing: 1px;
+    color: #FF1493;
+}
+
+/* ================================
+   RESPONSIVIDADE DO PROJETO
+================================ */
+
+html {
+    width: 100%;
+    overflow-x: clip;
+}
+
+body {
+    min-width: 0;
+    min-height: 100vh;
+}
+
+img {
+    max-width: 100%;
+}
+
+@media (max-width: 768px) {
+    .menu {
+        position: sticky;
+        top: 0;
+        padding: 15px 10px;
+        gap: 12px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .link-menu {
+        font-size: 1.2rem;
+        letter-spacing: 1px;
+    }
+
+    .hero-deadpool {
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        padding: 30px 18px;
+        gap: 20px;
+        min-height: auto;
+    }
+
+    .esquerdo,
+    .direito {
+        width: 100%;
+        max-width: 100%;
+        padding: 10px;
+        flex: auto;
+    }
+
+    .hero-titulo {
+        font-size: clamp(2.5rem, 10vw, 4rem);
+        letter-spacing: 3px;
+    }
+
+    .hero-subtitulo {
+        font-size: 1rem;
+    }
+
+    .deadpool-front {
+        width: 100%;
+        max-width: 320px;
+        max-height: 380px;
+        object-fit: contain;
+    }
+
+    .bloco-balao {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .btn-principal {
+        max-width: 100%;
+        padding: 13px 20px;
+        font-size: 1rem;
+    }
+
+    .container-principal {
+        width: 100%;
+        max-width: 100%;
+        margin: 25px auto;
+        padding: 0 15px;
+    }
+
+    .secao-perfil {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        padding: 20px;
+    }
+
+    .perfil-moldura {
+        max-width: 100%;
+    }
+
+    .perfil-foto {
+        display: block;
+        width: 100%;
+        max-width: 250px;
+        height: auto;
+        margin: 0 auto;
+        object-fit: cover;
+    }
+
+    .perfil-texto {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .perfil-texto h2 {
+        font-size: clamp(1.7rem, 6vw, 2.3rem);
+        overflow-wrap: anywhere;
+    }
+
+    .perfil-texto p {
+        font-size: 1rem;
+        overflow-wrap: anywhere;
+    }
+
+    .vitrine {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        width: 100%;
+        padding: 25px 15px;
+        gap: 15px;
+    }
+
+    .heroi {
+        min-width: 0;
+        height: auto;
+        min-height: 350px;
+        padding: 15px;
+        gap: 12px;
+    }
+
+    .foto-heroi {
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+    }
+
+    .titulo {
+        font-size: 1.6rem;
+        letter-spacing: 1px;
+        overflow-wrap: anywhere;
+    }
+
+    .txt {
+        margin-top: 0;
+        overflow-wrap: anywhere;
+    }
+
+    .botao {
+        width: 100%;
+        padding: 10px 5px;
+        font-size: 0.9rem;
+    }
 
     .chatContainer {
-        width: 85%;
+        width: calc(100% - 30px);
+        max-width: 600px;
+        height: 70vh;
+        min-height: 380px;
+        margin: 25px auto;
+    }
 
-        padding: 20px;
+    #boasVindas {
+        padding: 15px 10px;
+        font-size: 1.2rem;
+        overflow-wrap: anywhere;
     }
 
     #caixaChat {
-        height: 350px;
+        min-width: 0;
+        padding: 12px;
+    }
+
+    .msg {
+        max-width: 95%;
+        overflow-wrap: anywhere;
     }
 
     #inputArea {
-        flex-direction: column;
+        padding: 12px;
+        gap: 8px;
     }
 
-    #btnEnviar {
+    #inputArea input {
         width: 100%;
+        min-width: 0;
     }
 
+    #inputArea button {
+        flex-shrink: 0;
+        padding: 0 15px;
+    }
+
+    .box-cadastro,
+    .box-login {
+        width: calc(100% - 30px);
+        max-width: 500px;
+        margin: 30px auto;
+        padding: 20px 15px;
+        letter-spacing: 2px;
+    }
+
+    .cadastro,
+    .login-page {
+        font-size: 16px;
+        letter-spacing: 2px;
+    }
+
+    .box-cadastro h1,
+    .box-login h1 {
+        padding: 15px 5px;
+        font-size: 2rem;
+    }
+
+    .cadastro input,
+    .box-login input {
+        display: block;
+        width: 100%;
+        max-width: 100%;
+        margin: 8px auto;
+        padding: 13px 10px;
+        letter-spacing: normal;
+    }
+
+    .cadastro button,
+    .box-login button {
+        display: block;
+        width: 100%;
+        max-width: 100%;
+        margin: 15px auto;
+        padding: 13px 8px;
+        font-size: 1rem;
+        letter-spacing: 2px;
+    }
+
+    .cadastro #resposta,
+    .box-login #loginMensagem {
+        overflow-wrap: anywhere;
+    }
+
+    footer {
+        padding: 18px 12px;
+        overflow-wrap: anywhere;
+    }
 }
 
-/* CADASTRO */
+@media (max-width: 480px) {
+    .menu {
+        gap: 8px 12px;
+        padding: 12px 8px;
+    }
 
-.cadastroContainer {
-    width: 40%;
-    max-width: 550px;
-    margin:  80px auto 120px;
-    padding: 30px;
+    .link-menu {
+        font-size: 1rem;
+        letter-spacing: 0;
+    }
 
-    background-color: rgba(0, 0, 0, 0.85);
+    .hero-deadpool {
+        padding: 20px 12px;
+    }
 
-    border: 3px solid #FF1493;
-    border-radius: 20px;
+    .hero-titulo {
+        font-size: 2.5rem;
+        letter-spacing: 2px;
+    }
 
-    box-shadow: 0 0 25px rgba(255, 20, 147, 0.5);
-}
+    .deadpool-front {
+        max-width: 260px;
+        max-height: 320px;
+    }
 
-.cadastroContainer h2 {
-    font-family: 'Bodoni Moda', serif;
-    font-style: italic;
-    color: #FF1493;
-    text-align: center;
-    font-size: 30px;
-    margin-bottom: 30px;
-}
+    .secao-perfil {
+        padding: 15px;
+    }
 
-#formCadastro {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
+    .vitrine {
+        grid-template-columns: minmax(0, 1fr);
+        padding: 20px 15px;
+        gap: 20px;
+    }
 
-#formCadastro label {
-    color: white;
-    font-weight: bold;
-    margin-top: 5px;
-}
-
-#formCadastro input {
-    padding: 13px;
-    background-color: rgba(0, 0, 0, 0.9);
-    border: 2px solid #FF1493;
-    border-radius: 10px;
-
-    color: white;
-    font-size: 1rem;
-    outline: none;
-}
-
-#formCadastro input::placeholder {
-    color: #ccc;
-}
-
-#formCadastro input:focus {
-    box-shadow: 0 0 10px rgba(255, 20, 147, 0.5);
-}
-
-#formCadastro button {
-    margin-top: 15px;
-    padding: 13px;
-
-    background-color: #FF1493;
-    border: none;
-    border-radius: 10px;
-
-    color: #000;
-    font-weight: bold;
-    font-size: 1rem;
-
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-#formCadastro button:hover {
-    background-color: #8B0057;
-    color: white;
-    transform: translateY(-2px);
-    box-shadow: 0 0 15px rgba(255, 20, 147, 0.5);
-}
-
-#mensagemCadastro {
-    text-align: center;
-    color: #FF1493;
-    font-weight: bold;
-    margin-top: 20px;
-}
-
-.linkLogin {
-    text-align: center;
-    color: white;
-    margin-top: 20px;
-}
-
-.linkLogin a {
-    color: #FF1493;
-    font-weight: bold;
-    text-decoration: none;
-}
-
-.linkLogin a:hover {
-    color: white;
-}
-
-@media (max-width: 600px) {
-
-    .cadastroContainer {
-        width: 80%;
+    .heroi {
+        width: 100%;
+        min-height: 0;
         padding: 20px;
     }
 
-}
-
-/* LOGIN */
-.loginContainer {
-    width: 40%;
-    max-width: 550px;
-    margin: 80px auto 120px;
-    padding: 30px;
-
-    background-color: rgba(0, 0, 0, 0.85);
-
-    border: 3px solid #FF1493;
-    border-radius: 20px;
-
-    box-shadow: 0 0 25px rgba(255, 20, 147, 0.5);
-}
-
-.loginContainer h2 {
-    font-family: 'Bodoni Moda', serif;
-    font-style: italic;
-    color: #FF1493;
-    text-align: center;
-    font-size: 30px;
-    margin-bottom: 30px;
-}
-
-#formLogin {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-#formLogin label {
-    color: white;
-    font-weight: bold;
-    margin-top: 5px;
-}
-
-#formLogin input {
-    padding: 13px;
-
-    background-color: rgba(0, 0, 0, 0.9);
-    border: 2px solid #FF1493;
-    border-radius: 10px;
-
-    color: white;
-    font-size: 1rem;
-    outline: none;
-}
-
-#formLogin input::placeholder {
-    color: #ccc;
-}
-
-#formLogin input:focus {
-    box-shadow: 0 0 10px rgba(255, 20, 147, 0.5);
-}
-
-#formLogin button {
-    margin-top: 15px;
-    padding: 13px;
-
-    background-color: #FF1493;
-    border: none;
-    border-radius: 10px;
-
-    color: #000;
-    font-weight: bold;
-    font-size: 1rem;
-
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-#formLogin button:hover {
-    background-color: #8B0057;
-    color: white;
-    transform: translateY(-2px);
-    box-shadow: 0 0 15px rgba(255, 20, 147, 0.5);
-}
-
-#mensagemLogin {
-    text-align: center;
-    color: #FF1493;
-    font-weight: bold;
-    margin-top: 20px;
-}
-
-.linkCadastro {
-    text-align: center;
-    color: white;
-    margin-top: 20px;
-}
-
-.linkCadastro a {
-    color: #FF1493;
-    font-weight: bold;
-    text-decoration: none;
-}
-
-.linkCadastro a:hover {
-    color: white;
-}
-
-@media (max-width: 600px) {
-
-    .loginContainer {
-        width: 80%;
-        padding: 20px;
+    .foto-heroi {
+        height: 180px;
     }
 
-}
-
-/* responsividade */
-
-@media (max-width: 768px) {
-    .container-principal, .outros-container {
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
+    .titulo {
+        font-size: 1.8rem;
     }
 
-    
-    .container-principal, .bloco-balao, .card, img {
-        position: static !important;
-        max-width: 100% !important;
-        height: auto !important;
-        margin: 15px 0 !important;
-        transform: none !important;
+    .chatContainer {
+        width: calc(100% - 20px);
+        margin: 15px auto;
+        min-height: 350px;
+        height: 65vh;
+    }
+
+    #boasVindas {
+        font-size: 1.05rem;
+    }
+
+    #caixaChat {
+        padding: 10px;
+    }
+
+    .msg {
+        max-width: 100%;
+        padding: 10px;
+        font-size: 0.95rem;
+    }
+
+    #inputArea {
+        padding: 8px;
+        gap: 6px;
+    }
+
+    #inputArea input {
+        padding: 10px 8px;
+        font-size: 0.9rem;
+    }
+
+    #inputArea button {
+        padding: 0 10px;
+        font-size: 0.9rem;
+    }
+
+    .box-cadastro,
+    .box-login {
+        width: calc(100% - 20px);
+        margin: 20px auto;
+        padding: 18px 12px;
+        border-radius: 20px;
+    }
+
+    .cadastro,
+    .login-page {
+        font-size: 14px;
+        letter-spacing: 1px;
+    }
+
+    .cadastro h1,
+    .box-login h1 {
+        font-size: 1.7rem;
+    }
+
+    footer {
+        font-size: 0.8rem;
     }
 }

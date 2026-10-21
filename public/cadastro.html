@@ -1,14 +1,15 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro - ARTMS</title>
+    <title>Cadastro</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="server" href="server.js">
 </head>
 
-<body>
+<body class="cadastro">
 
     <nav class="menu">
         <a href="index.html" class="link-menu">HOME</a>
@@ -18,105 +19,80 @@
         <a href="login.html" class="link-menu">LOGIN</a>
     </nav>
 
-    <div class="cadastroContainer">
+    <div class="box-cadastro">
 
-        <h2>Crie sua conta</h2>
+        <h1>Cadastro</h1>
 
-        <form id="formCadastro">
+        <label for="usuario">Nome do usuário</label><br>
+        <input type="text" id="usuario" placeholder="Digite seu nome"><br><br>
 
-            <label for="usuario">Usuário</label>
-            <input
-                type="text"
-                id="usuario"
-                placeholder="Digite seu usuário"
-                required
-            >
+        <label for="email">E-mail</label><br>
+        <input type="email" id="email" placeholder="Digite seu e-mail"><br><br>
 
-            <label for="email">E-mail</label>
-            <input
-                type="email"
-                id="email"
-                placeholder="Digite seu e-mail"
-                required
-            >
+        <label for="senha">Senha</label><br>
+        <input type="password" id="senha" placeholder="Digite sua senha"><br><br>
 
-            <label for="senha">Senha</label>
-            <input
-                type="password"
-                id="senha"
-                placeholder="Digite sua senha"
-                required
-            >
+        <button onclick="validarDados()">Enviar</button>
 
-            <button type="submit">CADASTRAR</button>
-
-        </form>
-
-        <p id="mensagemCadastro"></p>
-
-        <p class="linkLogin">
-            Já possui uma conta?
-            <a href="login.html">Faça login</a>
-        </p>
+        <div id="resposta"></div>
 
     </div>
 
-    <footer>
-        &copy; Desenvolvido por Tainá Vitória - 2026 Curitiba
-    </footer>
-
     <script>
+        async function validarDados() {
+            const usuarioEntrada = document.querySelector('#usuario');
+            const emailEntrada = document.querySelector('#email');
+            const senhaEntrada = document.querySelector('#senha');
+            const resposta = document.querySelector('#resposta');
 
-        const formCadastro = document.querySelector('#formCadastro');
-        const mensagemCadastro = document.querySelector('#mensagemCadastro');
+            const usuarioDigitado = usuarioEntrada.value;
+            const emailDigitado = emailEntrada.value;
+            const senhaDigitada = senhaEntrada.value;
 
-        formCadastro.addEventListener('submit', async (evento) => {
+            if (!usuarioDigitado || !emailDigitado || !senhaDigitada) {
+                resposta.innerText = 'Preencha todos os campos antes de enviar!';
+                resposta.style.color = 'red';
+                return;
+            }
 
-            evento.preventDefault();
-
-            const usuario = document.querySelector('#usuario').value.trim();
-            const email = document.querySelector('#email').value.trim();
-            const senha = document.querySelector('#senha').value;
+            resposta.innerText = 'Aguarde, cadastrando no servidor...';
+            resposta.style.color = 'orange';
 
             try {
+                const respostaBe = await fetch('https://outubro.onrender.com/cadastro', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        usuario: usuarioDigitado,
+                        email: emailDigitado,
+                        senha: senhaDigitada
+                    })
+                });
 
-                const respostaServidor = await fetch(
-                    'http://localhost:5500/cadastro',
-                    {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            usuario: usuario,
-                            email: email,
-                            senha: senha
-                        })
-                    }
-                );
+                const dados = await respostaBe.json();
 
-                const dados = await respostaServidor.json();
-
-                if (!respostaServidor.ok) {
-                    mensagemCadastro.textContent = dados.erro;
+                if (!respostaBe.ok) {
+                    resposta.innerText = dados.erro;
+                    resposta.style.color = 'red';
                     return;
                 }
 
-                mensagemCadastro.textContent = dados.mensagem;
+                resposta.innerText = `${dados.mensagem}`;
+                resposta.style.color = 'green';
 
-                formCadastro.reset();
+                usuarioEntrada.value = '';
+                emailEntrada.value = '';
+                senhaEntrada.value = '';
 
             } catch (erro) {
-
-                mensagemCadastro.textContent =
-                    'Erro ao conectar com o servidor.';
-
+                console.error('Erro na requisição:', erro);
+                resposta.innerText = 'Erro ao conectar com o servidor!!';
+                resposta.style.color = 'red';
             }
-
-        });
-
+        }
     </script>
 
 </body>
-
 </html>

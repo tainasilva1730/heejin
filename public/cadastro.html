@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro - ARTMS</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <nav class="menu">
+        <a href="index.html" class="link-menu">HOME</a>
+        <a href="galeria.html" class="link-menu">GALERIA</a>
+        <a href="chat.html" class="link-menu">CHAT</a>
+        <a href="cadastro.html" class="link-menu">CADASTRO</a>
+        <a href="login.html" class="link-menu">LOGIN</a>
+    </nav>
+
+    <div class="cadastroContainer">
+
+        <h2>Crie sua conta</h2>
+
+        <form id="formCadastro">
+
+            <label for="usuario">Usuário</label>
+            <input
+                type="text"
+                id="usuario"
+                placeholder="Digite seu usuário"
+                required
+            >
+
+            <label for="email">E-mail</label>
+            <input
+                type="email"
+                id="email"
+                placeholder="Digite seu e-mail"
+                required
+            >
+
+            <label for="senha">Senha</label>
+            <input
+                type="password"
+                id="senha"
+                placeholder="Digite sua senha"
+                required
+            >
+
+            <button type="submit">CADASTRAR</button>
+
+        </form>
+
+        <p id="mensagemCadastro"></p>
+
+        <p class="linkLogin">
+            Já possui uma conta?
+            <a href="login.html">Faça login</a>
+        </p>
+
+    </div>
+
+    <footer>
+        &copy; Desenvolvido por Tainá Vitória - 2026 Curitiba
+    </footer>
+
+    <script>
+
+        const formCadastro = document.querySelector('#formCadastro');
+        const mensagemCadastro = document.querySelector('#mensagemCadastro');
+
+        formCadastro.addEventListener('submit', async (evento) => {
+
+            evento.preventDefault();
+
+            const usuario = document.querySelector('#usuario').value.trim();
+            const email = document.querySelector('#email').value.trim();
+            const senha = document.querySelector('#senha').value;
+
+            try {
+
+                const respostaServidor = await fetch(
+                    'http://localhost:5500/cadastro',
+                    {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            usuario: usuario,
+                            email: email,
+                            senha: senha
+                        })
+                    }
+                );
+
+                const dados = await respostaServidor.json();
+
+                if (!respostaServidor.ok) {
+                    mensagemCadastro.textContent = dados.erro;
+                    return;
+                }
+
+                mensagemCadastro.textContent = dados.mensagem;
+
+                formCadastro.reset();
+
+            } catch (erro) {
+
+                mensagemCadastro.textContent =
+                    'Erro ao conectar com o servidor.';
+
+            }
+
+        });
+
+    </script>
+
+</body>
+
+</html>

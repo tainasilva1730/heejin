@@ -81,7 +81,9 @@
                 emailEntrada.value = '';
                 senhaEntrada.value = '';
 
-            
+             setTimeout(() => {
+                 window.location.href = 'chat.html';
+                  }, 800);
 
             } catch (erro) {
                 console.error('Erro na requisição:', erro);

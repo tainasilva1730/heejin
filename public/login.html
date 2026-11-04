@@ -14,10 +14,24 @@
     <nav class="menu">
         <a href="index.html" class="link-menu">HOME</a>
         <a href="galeria.html" class="link-menu">GALERIA</a>
-        <a href="chat.html" class="link-menu">CHAT</a>
+          <a href="chat.html" class="link-menu" id="linkChat">CHAT</a>
         <a href="cadastro.html" class="link-menu">CADASTRO</a>
         <a href="login.html" class="link-menu">LOGIN</a>
     </nav>
+
+       <script>
+    const linkChat = document.querySelector('#linkChat');
+
+    linkChat.addEventListener('click', function(event) {
+        const usuarioLogado = localStorage.getItem('usuarioLogado');
+
+        if (!usuarioLogado) {
+            event.preventDefault();
+            window.location.href = 'cadastro.html';
+        }
+    });
+</script>
+
 
     <div class="box-login">
 
@@ -77,6 +91,7 @@
                 
                 loginMensagem.innerText = `${dados.mensagem} Conta: ${dados.usuario}`;
                 loginMensagem.style.color = 'green';
+                localStorage.setItem('usuarioLogado', dados.usuario);
 
                 emailEntrada.value = '';
                 senhaEntrada.value = '';
